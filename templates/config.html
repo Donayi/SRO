@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Configuracion</title>
+  <script src="/static/script_config.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body class="bg-gray-100 p-10">
+  <header class="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
+    <div class="container mx-auto px-4">
+        <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Navegación principal">
+            <!-- Logo o nombre del sitio -->
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-white">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    SRO
+                </h1>
+            </div>
+
+            <!-- Enlaces de navegación -->
+            <ul class="hidden md:flex space-x-8">
+                <li>
+                    <a href="{{url_for('index')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <i class="fa-solid fa-user-large"></i>
+                        Parrilla
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('parr')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <i class="fa-solid fa-user-group"></i>
+                        Parrilla 2
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <i class="fas fa-weight mr-2"></i>
+                        Pesos
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('calc')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <i class="fas fa-calculator mr-2"></i>
+                        Cálculo
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('conf')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <i class="fa-solid fa-gears"></i>
+                        Configuracion
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Botón de menú móvil -->
+            <div class="md:hidden">
+                <button class="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Menú móvil -->
+        <div class="hidden md:hidden">
+            <ul class="px-2 pt-2 pb-4 space-y-4">
+                <li>
+                    <a href="{{url_for('index')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <i class="fas fa-address-book mr-2"></i>
+                        Parrilla
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('parr')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <i class="fas fa-address-book mr-2"></i>
+                        Parrilla 2
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <i class="fas fa-weight mr-2"></i>
+                        Pesos
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('calc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <i class="fas fa-calculator mr-2"></i>
+                        Cálculo
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('conf')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <i class="fa-solid fa-gears"></i>
+                        Configuracion
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+  <div class="flex flex-col items-center gap-4 bg-white p-5 rounded shadow w-full">
+    <!-- Este contenedor ahora ocupa todo el ancho -->
+    <div class="flex justify-center w-full gap-4">
+      <!-- Cada bloque ocupa la mitad del ancho -->
+      <div class="w-1/2">
+        <label class="block bg-blue-700 text-white font-bold mb-2 text-center">Parrilla Original:</label>
+        <div class="flex space-x-2">
+          <select id="periodo" class="w-full p-2 border rounded"></select>
+        </div>
+      </div>
+      <div class="w-1/2">
+        <label class="block bg-green-700 text-white font-bold mb-2 text-center">Parrilla 2:</label>
+        <div class="flex space-x-2">
+          <select id="periodo2" class="w-full p-2 border rounded"></select>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center space-x-4">
+      <button onclick="consultarMdo()" style="width: 150px;" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+        Consultar
+      </button>
+      <button onclick="enviarDatos()" style="width: 150px;" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+        Enviar
+      </button>
+    </div>
+  </div>
+  
+
+  </div>
+
+  <div class="h-6"></div>
+  <!-- Tarjetas resumen -->
+<div class="flex space-x-4 mb-6">
+  <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 w-1/2 rounded shadow" id="resumen1">
+    <p class="font-bold">Parrila Original:</p>
+    <p id="total1">Selecciona un periodo</p>
+    <p id="fichero"></p>
+    <p id="Parrilla"></p>
+    <p id="Peri"></p>
+  </div>
+  <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 w-1/2 rounded shadow" id="resumen2">
+    <p class="font-bold">Periodo 2:</p>
+    <p id="total2">Selecciona un periodo</p>
+    <p id="fichero2"></p>
+    <p id="Parrilla2"></p>
+    <p id="Peri2"></p>
+  </div>
+</div>
+
+  <div class="flex justify-center gap-6 bg-white p-5 rounded shadow">
+
+    <div class="flex-1">
+    <!-- Tabla para primer periodo -->
+      <table class="min-w-full bg-white border border-gray-300 mb-6">
+        <thead class="bg-blue-700 text-white">
+          <tr>
+            <th class="py-2 px-4">#</th>
+            <th class="py-2 px-4">Mercados (Parrila Original)</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-mdo" class="text-center"></tbody>
+      </table>
+    </div>
+    <div class="flex-1">
+      <table class="min-w-full bg-white border border-gray-300">
+        <thead class="bg-green-700 text-white">
+          <tr>
+            <th class="py-2 px-4">#</th>
+            <th class="py-2 px-4">Mercados (Parilla 2)</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-mdo-2" class="text-center"></tbody>
+      </table>
+    </div>
+
+
+ </div>
+
+
+
+</body>
+</html>

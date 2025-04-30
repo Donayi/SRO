@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparativo de Productos</title>
+  <script defer src="/static/script_calc.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Navegación principal">
+                <!-- Logo o nombre del sitio -->
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-white">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        SRO
+                    </h1>
+                </div>
+
+                <!-- Enlaces de navegación -->
+                <ul class="hidden md:flex space-x-8">
+                    <li>
+                        <a href="{{url_for('index')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fa-solid fa-user-large"></i>
+                            Parrilla
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('parr')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fa-solid fa-user-group"></i>
+                            Parrilla 2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fas fa-weight mr-2"></i>
+                            Pesos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('calc')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Cálculo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('conf')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fa-solid fa-gears"></i>
+                            Configuracion
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Botón de menú móvil -->
+                <div class="md:hidden">
+                    <button class="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Menú móvil -->
+            <div class="hidden md:hidden">
+                <ul class="px-2 pt-2 pb-4 space-y-4">
+                    <li>
+                        <a href="{{url_for('index')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fas fa-address-book mr-2"></i>
+                            Parrilla
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('parr')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fas fa-address-book mr-2"></i>
+                            Parrilla 2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fas fa-weight mr-2"></i>
+                            Pesos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('calc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Cálculo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('conf')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fa-solid fa-gears"></i>
+                            Configuracion
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <br><br>
+    <!-- Tabla de configuracion de representantes-->
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <div class="grid grid-cols-2 gap-6">
+            <!-- Tabla Izquierda -->
+            <div>
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-blue-500 text-white">
+                            <th class="border border-gray-300 px-4 py-2">BU</th>
+                            <th class="border border-gray-300 px-4 py-2">Tipo</th>
+                            <th class="border border-gray-300 px-4 py-2"># Representantes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Climaterio</td>
+                            <td class="border border-gray-300 px-4 py-2">Hera</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                       data-bu="Climaterio" data-tipo="Hera" onchange="calculateTotals()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Climaterio</td>
+                            <td class="border border-gray-300 px-4 py-2">Atenea</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                       data-bu="Climaterio" data-tipo="Atenea" onchange="calculateTotals()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Ginecología</td>
+                            <td class="border border-gray-300 px-4 py-2">Hera</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                       data-bu="Ginecologia" data-tipo="Hera" onchange="calculateTotals()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Ginecología</td>
+                            <td class="border border-gray-300 px-4 py-2">Atenea</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                       data-bu="Ginecologia" data-tipo="Atenea" onchange="calculateTotals()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Obstetricia</td>
+                            <td class="border border-gray-300 px-4 py-2">Hera</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                       data-bu="Obstetricia" data-tipo="Hera" onchange="calculateTotals()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Obstetricia</td>
+                            <td class="border border-gray-300 px-4 py-2">Atenea</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                       data-bu="Obstetricia" data-tipo="Atenea" onchange="calculateTotals()">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Right Side -->
+            <div class="space-y-6">
+                <!-- Tabla derecha -->
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-blue-500 text-white">
+                            <th class="border border-gray-300 px-4 py-2">BU</th>
+                            <th class="border border-gray-300 px-4 py-2">Total Representantes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Climaterio</td>
+                            <td class="border border-gray-300 px-4 py-2" id="total-Climaterio">0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Ginecología</td>
+                            <td class="border border-gray-300 px-4 py-2" id="total-Ginecologia">0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Obstetricia</td>
+                            <td class="border border-gray-300 px-4 py-2" id="total-Obstetricia">0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">Representantes Exeltis</td>
+                            <td class="border border-gray-300 px-4 py-2" id="reps-Exeltis">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button id="btn-guardar-contactos" class="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors text-lg font-medium">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Guardar Representantes
+                </button>
+
+                <!-- Calcular Button -->
+                <button id="btn-calcular" class="w-full bg-blue-500 text-white py-3 px-6 rounded-md hover:bg-blue-600 transition-colors text-lg font-medium">
+                    Calcular
+                </button>
+                
+                <!-- Timer Display -->
+                <div id="timer" class="text-center my-4 text-lg font-semibold text-blue-600 hidden">
+                    Tiempo transcurrido: <span id="timer-mins">00</span>:<span id="timer-secs">00</span>
+                </div>
+
+
+                <div id="spinner" class="hidden text-center my-4">
+                    <span class="text-blue-600 font-semibold">Cargando...</span>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+    <h1 class="text-3xl font-bold mb-6 text-center bg-blue-600 text-white p-4 rounded-lg shadow-md">
+        Comparativo Parrillas
+    </h1>
+    <!-- Tabla Total -->
+    <div class="container mx-auto">
+        <img src="{{ url_for('custom_static', filename='Exeltis_logo.png') }}" alt="Imagen" width="300" height="200">
+        <br>
+        <div class="flex flex-row gap-4 mb-6 justify-center">
+            <div class="basis-1/6 min-w-[190px]"></div>
+            <div class="basis-2/6 bg-blue-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
+            <div class="basis-2/6 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
+            <div class="basis-1/6 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Variaciones</div>
+        </div>
+        <br>
+        <table  class="mb-4 w-full table-auto text-left text-sm text-gray-800 rounded-2xl overflow-hidden shadow-md">
+            <thead class="bg-gradient-to-r from-blue-300 via-blue-500 to-blue-600">
+              <tr>
+                <th class="text-center p-2 min-w-[190px]">Producto</th>
+                <th class="text-center p-2">Cont. PPI</th>
+                <th class="text-center p-2">Cont. Pond.</th>
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">Cont. PPI</th>  
+                <th class="text-center p-2">Cont. Pond.</th>          
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">(%) PPI</th>
+                <th class="text-center p-2">(%) Pond.</th>
+              </tr>
+            </thead>
+            <tbody id="mini-tabla-tot" class="bg-white"></tbody>
+          </table>
+
+    <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-md">
+        <thead class="bg-gradient-to-r from-gray-400 via-gray-300 to-gray-200">
+            <tr>
+                <th class="text-center p-2 min-w-[190px]">Producto</th>
+                <th class="text-center p-2">Cont. PPI</th>
+                <th class="text-center p-2">Cont. Pond.</th>
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">Cont. PPI</th>  
+                <th class="text-center p-2">Cont. Pond.</th>          
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">(%) PPI</th>
+                <th class="text-center p-2">(%) Pond.</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-tot-body"></tbody>
+        </table>
+    </div>
+    <br><br>
+    <div class="flex flex-row  mx-auto bg-white rounded-lg shadow-md p-6">
+            <!-- Cuadro Izquierdo -->
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                    <legend class="text-lg font-semibold text-gray-700 px-2">Capacidad</legend>
+                    <label >Heras :</label>
+                    <input type="text" id="resultadoTotal-Hera" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >Ateneas :</label>
+                    <input type="text" id="resultadoTotal-Atenea" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >Capacidad total: :</label>
+                    <input type="text" id="resultadoTotal" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            </fieldset>
+            </div>
+            
+            <!-- Cuadro PPI 1 -->
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                    <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones</legend>
+                    <label >PPI-1 :</label>
+                    <input type="text" id="PPI-1-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >PPI-2 :</label>
+                    <input type="text" id="PPI-2-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >PPI-3:</label>
+                    <input type="text" id="PPI-3-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                </fieldset>
+            </div>
+            <!-- Cuadro PPI 2 -->
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                    <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones-2</legend>
+                    <label >PPI-1 :</label>
+                    <input type="text" id="PPI-1-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >PPI-2 :</label>
+                    <input type="text" id="PPI-2-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >PPI-3:</label>
+                    <input type="text" id="PPI-3-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                </fieldset>
+            </div>
+    </div>
+    
+    <br><br>
+    <!-- Tabla Climaterio -->
+    <div class="container mx-auto">
+        <!--<h2 class="text-xl font-bold mb-4">Climaterio</h2>-->
+        <img src="{{ url_for('custom_static', filename='Clim_logo.png') }}" alt="Imagen" width="300" height="200">
+        <br>
+        <div class="flex flex-row gap-4 mb-6 justify-center">
+            <div class="basis-1/6"></div>
+            <div class="basis-2/6 bg-cyan-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
+            <div class="basis-2/6 bg-cyan-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
+            <div class="basis-1/6 bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Variaciones</div>
+        </div>
+        <br>
+        <table class="mb-4 w-full table-auto text-left text-sm text-gray-800 rounded-2xl overflow-hidden shadow-md">
+            <thead class="bg-gradient-to-r from-cyan-300 via-cyan-500 to-cyan-600">
+                <tr>
+                    <th class="text-center p-2">Producto</th>
+                    <th class="text-center p-2">Cont. PPI</th>
+                    <th class="text-center p-2">Cont. Pond.</th>
+                    <th class="text-center p-2">% Cont</th>
+                    <th class="text-center p-2">FTEs</th>
+                    <th class="text-center p-2">Reach</th>
+                    <td class="border-b p-4"></td>
+                    <th class="text-center p-2">Cont. PPI</th>  
+                    <th class="text-center p-2">Cont. Pond.</th>          
+                    <th class="text-center p-2">% Cont</th>
+                    <th class="text-center p-2">FTEs</th>
+                    <th class="text-center p-2">Reach</th>
+                    <td class="border-b p-4"></td>
+                    <th class="text-center p-2">(%) PPI</th>
+                    <th class="text-center p-2">(%) Pond.</th>
+                </tr>
+            </thead>
+            <tbody id="mini-tabla-clim" class="bg-white"></tbody>
+        </table>
+
+        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-md">
+        <thead class="bg-gradient-to-r from-gray-400 via-gray-300 to-gray-200">
+            <tr>
+                <th class="text-center p-2">Producto</th>
+                <th class="text-center p-2">Cont. PPI</th>
+                <th class="text-center p-2">Cont. Pond.</th>
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">Cont. PPI</th>  
+                <th class="text-center p-2">Cont. Pond.</th>          
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">(%) PPI</th>
+                <th class="text-center p-2">(%) Pond.</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-clim-body"></tbody>
+        </table>
+    </div>
+    <br><br>
+    <div class="flex flex-row  mx-auto bg-white rounded-lg shadow-md p-6">
+        <!-- Cuadro Izquierdo -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                <legend class="text-lg font-semibold text-gray-700 px-2">Capacidad</legend>
+                <label >Heras :</label>
+                <input type="text" id="resultadoClim-Hera" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >Ateneas :</label>
+                <input type="text" id="resultadoClim-Atenea" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >Capacidad total: :</label>
+                <input type="text" id="resultadoClim" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+        </fieldset>
+        </div>
+        
+        <!-- Cuadro PPI 1 -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones</legend>
+                <label >PPI-1 :</label>
+                <input type="text" id="PPI-1-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >PPI-2 :</label>
+                <input type="text" id="PPI-2-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >PPI-3:</label>
+                <input type="text" id="PPI-3-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            </fieldset>
+        </div>
+        <!-- Cuadro PPI 2 -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones-2</legend>
+                <label >PPI-1 :</label>
+                <input type="text" id="PPI-1-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >PPI-2 :</label>
+                <input type="text" id="PPI-2-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >PPI-3:</label>
+                <input type="text" id="PPI-3-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            </fieldset>
+        </div>
+    </div>
+    <br><br>
+    <!-- Tabla Ginecologia -->
+    <div class="container mx-auto">
+        <img src="{{ url_for('custom_static', filename='Gine_logo.png') }}" alt="Imagen" width="300" height="200">
+        <br>
+        <div class="flex flex-row gap-4 mb-6 justify-center">
+            <div class="basis-1/6"></div>
+            <div class="basis-2/6 bg-green-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
+            <div class="basis-2/6 bg-green-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
+            <div class="basis-1/6 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Variaciones</div>
+        </div>
+        <br>
+        <table class="mb-4 w-full table-auto text-left text-sm text-gray-800 rounded-2xl overflow-hidden shadow-md">
+            <thead class="bg-gradient-to-r from-green-300 via-green-500 to-green-600">
+                <tr>
+                    <th class="text-center p-2">Producto</th>
+                    <th class="text-center p-2">Cont. PPI</th>
+                    <th class="text-center p-2">Cont. Pond.</th>
+                    <th class="text-center p-2">% Cont</th>
+                    <th class="text-center p-2">FTEs</th>
+                    <th class="text-center p-2">Reach</th>
+                    <td class="border-b p-4"></td>
+                    <th class="text-center p-2">Cont. PPI</th>  
+                    <th class="text-center p-2">Cont. Pond.</th>          
+                    <th class="text-center p-2">% Cont</th>
+                    <th class="text-center p-2">FTEs</th>
+                    <th class="text-center p-2">Reach</th>
+                    <td class="border-b p-4"></td>
+                    <th class="text-center p-2">(%) PPI</th>
+                    <th class="text-center p-2">(%) Pond.</th>
+                </tr>
+              </thead>
+              <tbody id="mini-tabla-gine" class="bg-white"></tbody>
+            </table>
+
+        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-md">
+            <thead class="bg-gradient-to-r from-gray-400 via-gray-300 to-gray-200">
+            <tr>
+                <th class="text-center p-2">Producto</th>
+                <th class="text-center p-2">Cont. PPI</th>
+                <th class="text-center p-2">Cont. Pond.</th>
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">Cont. PPI</th>  
+                <th class="text-center p-2">Cont. Pond.</th>          
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">(%) PPI</th>
+                <th class="text-center p-2">(%) Pond.</th>
+            </tr>
+            </thead>
+            <tbody id="tabla-gine-body"></tbody>
+        </table>
+        </div>
+        <br><br>
+        <div class="flex flex-row  mx-auto bg-white rounded-lg shadow-md p-6">
+            <!-- Cuadro Izquierdo -->
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                    <legend class="text-lg font-semibold text-gray-700 px-2">Capacidad</legend>
+                    <label >Heras :</label>
+                    <input type="text" id="resultadoGine-Hera" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >Ateneas :</label>
+                    <input type="text" id="resultadoGine-Atenea" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >Capacidad total: :</label>
+                    <input type="text" id="resultadoGine" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            </fieldset>
+            </div>
+            
+            <!-- Cuadro PPI 1 -->
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                    <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones</legend>
+                    <label >PPI-1 :</label>
+                    <input type="text" id="PPI-1-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >PPI-2 :</label>
+                    <input type="text" id="PPI-2-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >PPI-3:</label>
+                    <input type="text" id="PPI-3-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                </fieldset>
+            </div>
+            <!-- Cuadro PPI 2 -->
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                    <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones-2</legend>
+                    <label >PPI-1 :</label>
+                    <input type="text" id="PPI-1-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >PPI-2 :</label>
+                    <input type="text" id="PPI-2-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                    <label >PPI-3:</label>
+                    <input type="text" id="PPI-3-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                </fieldset>
+            </div>
+    </div>
+    <br><br>
+          <!-- Tabla Obstetricia -->
+    <div class="container mx-auto">
+        <img src="{{ url_for('custom_static', filename='Obte_logo.png') }}" alt="Imagen" width="300" height="200">    
+        <br>
+        <div class="flex flex-row gap-4 mb-6 justify-center">
+            <div class="basis-1/6"></div>
+            <div class="basis-2/6 bg-indigo-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
+            <div class="basis-2/6 bg-indigo-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
+            <div class="basis-1/6 bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Variaciones</div>
+        </div>
+        <br>
+        <table class="mb-4 w-full table-auto text-left text-sm text-gray-800 rounded-2xl overflow-hidden shadow-md">
+            <thead class="bg-gradient-to-r from-indigo-300 via-indigo-500 to-indigo-600">
+                <tr>
+                    <th class="text-center p-2">Producto</th>
+                    <th class="text-center p-2">Cont. PPI</th>
+                    <th class="text-center p-2">Cont. Pond.</th>
+                    <th class="text-center p-2">% Cont</th>
+                    <th class="text-center p-2">FTEs</th>
+                    <th class="text-center p-2">Reach</th>
+                    <td class="border-b p-4"></td>
+                    <th class="text-center p-2">Cont. PPI</th>  
+                    <th class="text-center p-2">Cont. Pond.</th>          
+                    <th class="text-center p-2">% Cont</th>
+                    <th class="text-center p-2">FTEs</th>
+                    <th class="text-center p-2">Reach</th>
+                    <td class="border-b p-4"></td>
+                    <th class="text-center p-2">(%) PPI</th>
+                    <th class="text-center p-2">(%) Pond.</th>
+                </tr>
+              </thead>
+              <tbody id="mini-tabla-obste" class="bg-white"></tbody>
+          </table>
+    
+        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-md">
+          <thead class="bg-gradient-to-r from-gray-400 via-gray-300 to-gray-200">
+            <tr>
+                <th class="text-center p-2">Producto</th>
+                <th class="text-center p-2">Cont. PPI</th>
+                <th class="text-center p-2">Cont. Pond.</th>
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">Cont. PPI</th>  
+                <th class="text-center p-2">Cont. Pond.</th>          
+                <th class="text-center p-2">% Cont</th>
+                <th class="text-center p-2">FTEs</th>
+                <th class="text-center p-2">Reach</th>
+                <td class="border-b p-4"></td>
+                <th class="text-center p-2">(%) PPI</th>
+                <th class="text-center p-2">(%) Pond.</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-obste-body"></tbody>
+        </table>
+      </div>
+      <br><br>
+      <div class="flex flex-row  mx-auto bg-white rounded-lg shadow-md p-6">
+        <!-- Cuadro Izquierdo -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                <legend class="text-lg font-semibold text-gray-700 px-2">Capacidad</legend>
+                <label >Heras :</label>
+                <input type="text" id="resultadoObste-Hera" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >Ateneas :</label>
+                <input type="text" id="resultadoObste-Atenea" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >Capacidad total: :</label>
+                <input type="text" id="resultadoObste" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+        </fieldset>
+        </div>
+        
+        <!-- Cuadro PPI 1 -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones</legend>
+                <label >PPI-1 :</label>
+                <input type="text" id="PPI-1-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >PPI-2 :</label>
+                <input type="text" id="PPI-2-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >PPI-3:</label>
+                <input type="text" id="PPI-3-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            </fieldset>
+        </div>
+        <!-- Cuadro PPI 2 -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones-2</legend>
+                <label >PPI-1 :</label>
+                <input type="text" id="PPI-1-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >PPI-2 :</label>
+                <input type="text" id="PPI-2-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label >PPI-3:</label>
+                <input type="text" id="PPI-3-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            </fieldset>
+        </div>
+    </div>
+<br><br>
+
+   
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo con Input</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function calculateTotals() {
+            const inputs = document.querySelectorAll('input[type="number"]');
+
+            const totalCapacidad_vf = [
+                { nombre: 'Climaterio', Hera: 0, Atenea: 0 },
+                { nombre: 'Obstetricia', Hera: 0, Atenea: 0 },
+                { nombre: 'Ginecologia', Hera: 0, Atenea: 0 }
+            ];
+
+            inputs.forEach(input => {
+                const bu = input.dataset.bu;
+                const tipo = input.dataset.tipo;
+                const value = Number(input.value) || 0;
+                const categoria = totalCapacidad_vf.find(area => area.nombre === bu);
+
+                if (categoria) {
+                    if (tipo === "Hera") {
+                        categoria.Hera += value * 3 * 12 * 220;
+                    } else {
+                        categoria.Atenea += value * 3 * 12 * 210;
+                    }
+                }
+            });
+
+            // Cálculo de totales
+            const totalCapTotal_v2 = totalCapacidad_vf.reduce((sum, area) => sum + area.Hera + area.Atenea, 0);
+            const totalCapHera = totalCapacidad_vf.reduce((sum, area) => sum + area.Hera, 0);
+            const totalCapAtenea = totalCapacidad_vf.reduce((sum, area) => sum + area.Atenea, 0);
+
+            // Obtener valores individuales con comprobación de existencia
+            const totalClim  = totalCapacidad_vf.find(area => area.nombre === 'Climaterio') || { Hera: 0, Atenea: 0 };
+            const totalObste = totalCapacidad_vf.find(area => area.nombre === 'Obstetricia') || { Hera: 0, Atenea: 0 };
+            const totalGine  = totalCapacidad_vf.find(area => area.nombre === 'Ginecologia') || { Hera: 0, Atenea: 0 };
+
+            // Asignar valores a los resultados
+            document.getElementById("resultadoTotal").value = totalCapTotal_v2;
+            document.getElementById("resultadoTotal-Hera").value = totalCapHera;
+            document.getElementById("resultadoTotal-Atenea").value = totalCapAtenea;
+
+            document.getElementById("resultadoClim").value = totalClim.Hera + totalClim.Atenea;
+            document.getElementById("resultadoClim-Hera").value = totalClim.Hera;
+            document.getElementById("resultadoClim-Atenea").value = totalClim.Atenea;
+
+            document.getElementById("resultadoObste").value = totalObste.Hera + totalObste.Atenea;
+            document.getElementById("resultadoObste-Hera").value = totalObste.Hera;
+            document.getElementById("resultadoObste-Atenea").value = totalObste.Atenea;
+
+            document.getElementById("resultadoGine").value = totalGine.Hera + totalGine.Atenea;
+            document.getElementById("resultadoGine-Hera").value = totalGine.Hera;
+            document.getElementById("resultadoGine-Atenea").value = totalGine.Atenea;
+        }
+    </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-xl p-6 max-w-3xl w-full">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Cálculo de Capacidad</h1>
+
+        <!-- Inputs -->
+        <div class="grid grid-cols-2 gap-4">
+            <input type="number" min="0" class="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500" data-bu="Climaterio" data-tipo="Hera" onchange="calculateTotals()" placeholder="Climaterio - Hera">
+            <input type="number" min="0" class="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500" data-bu="Climaterio" data-tipo="Atenea" onchange="calculateTotals()" placeholder="Climaterio - Atenea">
+            <input type="number" min="0" class="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500" data-bu="Obstetricia" data-tipo="Hera" onchange="calculateTotals()" placeholder="Obstetricia - Hera">
+            <input type="number" min="0" class="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500" data-bu="Obstetricia" data-tipo="Atenea" onchange="calculateTotals()" placeholder="Obstetricia - Atenea">
+            <input type="number" min="0" class="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500" data-bu="Ginecologia" data-tipo="Hera" onchange="calculateTotals()" placeholder="Ginecología - Hera">
+            <input type="number" min="0" class="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500" data-bu="Ginecologia" data-tipo="Atenea" onchange="calculateTotals()" placeholder="Ginecología - Atenea">
+        </div>
+
+        <!-- Resultados -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <div class="col-span-2">
+                <label class="text-lg font-semibold">Capacidad Total:</label>
+                <input type="text" id="resultadoTotal" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+            <div>
+                <label class="text-lg font-semibold">Total Hera:</label>
+                <input type="text" id="resultadoTotal-Hera" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+            <div>
+                <label class="text-lg font-semibold">Total Atenea:</label>
+                <input type="text" id="resultadoTotal-Atenea" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+        </div>
+
+        <h2 class="text-xl font-bold mt-6">Resultados Climaterio:</h2>
+        <div class="mt-4 grid grid-cols-3 gap-4">
+            <div>
+                <label class="text-lg font-semibold">Total:</label>
+                <input type="text" id="resultadoClim" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+            <div>
+                <label class="text-lg font-semibold">Hera:</label>
+                <input type="text" id="resultadoClim-Hera" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+            <div>
+                <label class="text-lg font-semibold">Atenea:</label>
+                <input type="text" id="resultadoClim-Atenea" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+        </div>
+
+        <h2 class="text-xl font-bold mt-6">Resultados Obstetricia:</h2>
+        <div class="mt-4 grid grid-cols-3 gap-4">
+            <div>
+                <label class="text-lg font-semibold">Total:</label>
+                <input type="text" id="resultadoObste" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+            <div>
+                <label class="text-lg font-semibold">Hera:</label>
+                <input type="text" id="resultadoObste-Hera" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+            <div>
+                <label class="text-lg font-semibold">Atenea:</label>
+                <input type="text" id="resultadoObste-Atenea" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+        </div>
+
+        <h2 class="text-xl font-bold mt-6">Resultados Ginecologia:</h2>
+        <div class="mt-4 grid grid-cols-3 gap-4">
+            <div>
+                <label class="text-lg font-semibold">Total:</label>
+                <input type="text" id="resultadoGine" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+            <div>
+                <label class="text-lg font-semibold">Hera:</label>
+                <input type="text" id="resultadoGine-Hera" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+            <div>
+                <label class="text-lg font-semibold">Atenea:</label>
+                <input type="text" id="resultadoGine-Atenea" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

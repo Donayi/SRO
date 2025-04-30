@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRO</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Navegación principal">
+                <!-- Logo o nombre del sitio -->
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-white">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        SRO
+                    </h1>
+                </div>
+
+                <!-- Enlaces de navegación -->
+                <ul class="hidden md:flex space-x-8">
+                    <li>
+                        <a href="{{url_for('index')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fa-solid fa-user-large"></i>
+                            Parrilla
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('parr')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fa-solid fa-user-group"></i>
+                            Parrilla 2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fas fa-weight mr-2"></i>
+                            Pesos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('calc')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Cálculo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('conf')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fa-solid fa-gears"></i>
+                            Configuracion
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Botón de menú móvil -->
+                <div class="md:hidden">
+                    <button class="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Menú móvil -->
+            <div class="hidden md:hidden">
+                <ul class="px-2 pt-2 pb-4 space-y-4">
+                    <li>
+                        <a href="{{url_for('index')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fas fa-address-book mr-2"></i>
+                            Parrilla
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('parr')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fas fa-address-book mr-2"></i>
+                            Parrilla 2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fas fa-weight mr-2"></i>
+                            Pesos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('calc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Cálculo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('conf')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fa-solid fa-gears"></i>
+                            Configuracion
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+<br><br>
+<section class="container max-w-6xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-8 bg-blue-800 shadow-2xl rounded-2xl text-white transition-all duration-300">
+    <div class="flex flex-col justify-center">
+      <label for="category" class="mb-3 text-xl font-bold tracking-wide">Unidad de negocio:</label>
+      <select id="category" class="p-3 rounded-lg bg-blue-700 text-white border border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-400 transition duration-200">
+        <option disabled selected>- Elige una opción -</option>
+        <option value="climaterio">Climaterio</option>
+        <option value="obstetricia">Obstetricia</option>
+        <option value="ginecologia">Ginecología</option>
+      </select>
+    </div>
+  
+    <div class="grid justify-items-center items-start">
+        <h1 class="text-5xl font-bold mb-2">
+            Parrilla 1
+        </h1>
+    </div>
+  </section>
+<br><br><br>
+<div class="max-w-7xl mx-auto bg-white rounded-lg shadow-lg p-6">
+    <table>
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Ciclo 1</th>
+                <th>Ciclo 2</th>
+                <th>Ciclo 3</th>
+                <th>Ciclo 4</th>
+                <th>Ciclo 5</th>
+                <th>Ciclo 6</th>
+                <th>Ciclo 7</th>
+                <th>Ciclo 8</th>
+                <th>Ciclo 9</th>
+                <th>Ciclo 10</th>
+                <th>Ciclo 11</th>
+                <th>Ciclo 12</th>
+                <th>Seleccionar Todos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CUP BELLAFEM MATERNAL</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BELLAFEM MATERNAL" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP BELLAFEM MATERNAL">Todos</button></td>
+            </tr>
+            <tr>
+                <td>CUP BONJESTA</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP BONJESTA" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP BONJESTA">Todos</button></td>
+            </tr>
+            <tr>
+                <td>CUP EVEMGLEA</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP EVEMGLEA" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP EVEMGLEA">Todos</button></td>
+            </tr>
+            <tr>
+                <td>CUP FEMEDUAL - GYNOPHILUS RESTORE</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FEMEDUAL - GYNOPHILUS RESTORE" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP FEMEDUAL - GYNOPHILUS RESTORE">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP FERREXEL - NOCELE</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FERREXEL - NOCELE" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP FERREXEL - NOCELE">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP FISIOFER</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FISIOFER" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP FISIOFER">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP CISTEXEL - FOSUNE</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP CISTEXEL - FOSUNE" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP CISTEXEL - FOSUNE">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP GESTAGENO - PAZ OB</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GESTAGENO - PAZ OB" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP GESTAGENO - PAZ OB">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP IDYLLA</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP IDYLLA" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP IDYLLA">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP INOFOLIC HP - MILEVA 35</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP INOFOLIC HP - MILEVA 35" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP INOFOLIC HP - MILEVA 35">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP LIVIAXAN - XANELLE</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP LIVIAXAN - XANELLE" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP LIVIAXAN - XANELLE">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP MILDA</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MILDA" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP MILDA">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP REGENESIS MAX</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP REGENESIS MAX" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP REGENESIS MAX">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP SANDRENA - GESTAGENO</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SANDRENA - GESTAGENO" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP SANDRENA - GESTAGENO">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP SIENNA - VIPLENA</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SIENNA - VIPLENA" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP SIENNA - VIPLENA">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP GINORELLE</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP GINORELLE" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP GINORELLE">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP SLINDA</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP SLINDA" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP SLINDA">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP FAM TRANSVITAL</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP FAM TRANSVITAL" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP FAM TRANSVITAL">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP TRILEXA - GYNOPHILUS RESTORE</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRILEXA - GYNOPHILUS RESTORE" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP TRILEXA - GYNOPHILUS RESTORE">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP TURNOVER</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TURNOVER" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP TURNOVER">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP MAKZIM</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP MAKZIM">Todos</button></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br><br>
+<div class="flex justify-center space-x-4 ">
+    <button id="saveButton" class="px-2 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ">
+      Guardar selección
+    </button>
+    <button id="clearButton" class="px-2 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 ">
+      Limpiar Parrilla
+    </button>
+    <button id="clearTotal" class="px-2 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-green-500 ">
+    Borrar Parrillas
+    </button>
+  </div>
+
+
+<div class="output" id="output"></div>
+
+<fieldset class="border border-gray-300 rounded-lg p-4 shadow-md max-w-7xl mx-auto">
+    <legend class="text-lg font-semibold text-gray-700 px-2">Resumen</legend>
+    
+    <div class="totals grid grid-cols-1 md:grid-cols-3 gap-4 mt-4" id="totals">
+      <div id="climaterioTotals" class="p-4 bg-gray-100 rounded-lg shadow">
+        <h3 class="text-xl font-semibold text-gray-800">Climaterio</h3>
+        <table class="w-full mt-2 border-collapse">
+          <tbody></tbody>
+        </table>
+      </div>
+  
+      <div id="obstetriciaTotals" class="p-4 bg-gray-100 rounded-lg shadow">
+        <h3 class="text-xl font-semibold text-gray-800">Obstetricia</h3>
+        <table class="w-full mt-2 border-collapse">
+          <tbody></tbody>
+        </table>
+      </div>
+  
+      <div id="ginecologiaTotals" class="p-4 bg-gray-100 rounded-lg shadow">
+        <h3 class="text-xl font-semibold text-gray-800">Ginecología</h3>
+        <table class="w-full mt-2 border-collapse">
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </fieldset>
+
+<fieldset class="border border-gray-300 rounded-lg p-4 shadow-md max-w-7xl mx-auto">
+  <legend class="text-lg font-semibold text-gray-700 px-2">Parrilla</legend>
+  
+  <div class="summary grid grid-cols-1 md:grid-cols-3 gap-4 mt-4" id="summary">
+    <div id="climaterioSummary" class="p-4 bg-gray-100 rounded-lg shadow">
+      <h3 class="text-xl font-semibold text-gray-800">Climaterio</h3>
+      <table class="w-full mt-2 border-collapse">
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="obstetriciaSummary" class="p-4 bg-gray-100 rounded-lg shadow">
+      <h3 class="text-xl font-semibold text-gray-800">Obstetricia</h3>
+      <table class="w-full mt-2 border-collapse">
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="ginecologiaSummary" class="p-4 bg-gray-100 rounded-lg shadow">
+      <h3 class="text-xl font-semibold text-gray-800">Ginecología</h3>
+      <table class="w-full mt-2 border-collapse">
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</fieldset>
+
+<br><br><br><br><br>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
