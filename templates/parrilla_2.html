@@ -16,10 +16,10 @@
             <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Navegación principal">
                 <!-- Logo o nombre del sitio -->
                 <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-white">
+                    <a href="{{url_for('ini')}}" class="text-2xl font-bold text-white">
                         <i class="fas fa-chart-line mr-2"></i>
                         SRO
-                    </h1>
+                    </a>
                 </div>
 
                 <!-- Enlaces de navegación -->
@@ -40,6 +40,12 @@
                         <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
                             <i class="fas fa-weight mr-2"></i>
                             Pesos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('reps')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fa-regular fa-circle-user"></i>
+                            Representantes
                         </a>
                     </li>
                     <li>
@@ -83,6 +89,12 @@
                         <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
                             <i class="fas fa-weight mr-2"></i>
                             Pesos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fa-regular fa-circle-user"></i>
+                            Representantes
                         </a>
                     </li>
                     <li>
@@ -491,6 +503,40 @@
                 <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="11" /></td>
                 <td><input type="checkbox" class="cycle" data-description="CUP MAKZIM" data-cycle="12" /></td>
                 <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP MAKZIM">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP TRANSVITAL - TRANSVITAL D</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL - TRANSVITAL D" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP TRANSVITAL - TRANSVITAL D">Todos</button></td>
+
+            </tr>
+            <tr>
+                <td>CUP TRANSVITAL E</td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E" data-cycle="1" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E" data-cycle="2" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E" data-cycle="3" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E"data-cycle="4" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E"data-cycle="5" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E" data-cycle="6" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E" data-cycle="7" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E" data-cycle="8" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E"data-cycle="9" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E" data-cycle="10" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E" data-cycle="11" /></td>
+                <td><input type="checkbox" class="cycle" data-description="CUP TRANSVITAL E" data-cycle="12" /></td>
+                <td><button class="select-all px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" data-row="CUP TRANSVITAL E">Todos</button></td>
 
             </tr>
         </tbody>

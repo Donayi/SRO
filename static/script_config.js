@@ -89,8 +89,12 @@ async function consultarMdo() {
   tabla2.appendChild(total2);
 
   // Actualizar tarjetas resumen
-  document.getElementById('total1').textContent = `Periodo ${periodo} - Total mercados: ${mdoList.length}`;
-  document.getElementById('total2').textContent = `Periodo ${periodo2} - Total mercados: ${mdoList2.length}`;
+  document.getElementById('total1').textContent = `Total mercados: ${mdoList.length}`;
+  document.getElementById('total2').textContent = `Total mercados: ${mdoList2.length}`;
+
+  // Nueva línea que agregamos aquí:
+  await lectura();
+  await lectura2();
 }
 
 async function lectura() {
@@ -100,8 +104,10 @@ async function lectura() {
   const fila = data[0];
 
   document.getElementById('fichero').textContent = `Fichero: ${fila.Fichero_mod}`;
+  document.getElementById('ficheroD').textContent = `Fichero: ${fila.Fichero_Desp}`;
   document.getElementById('Parrilla').textContent = `Parrilla: ${fila.Parrilla}`;
   document.getElementById('Peri').textContent = `Periodo: ${fila.Periodo}`;
+  document.getElementById('Conge').textContent = `Congeladora: ${fila.Congeladora}`;
 
   datosLectura1 = fila;
 }
@@ -113,8 +119,10 @@ async function lectura2() {
   const fila2 = data2[0];
 
   document.getElementById('fichero2').textContent = `Fichero: ${fila2.Fichero_mod}`;
+  document.getElementById('ficheroD2').textContent = `Fichero: ${fila2.Fichero_Desp}`;
   document.getElementById('Parrilla2').textContent = `Parrilla: ${fila2.Parrilla}`;
   document.getElementById('Peri2').textContent = `Periodo: ${fila2.Periodo}`;
+  document.getElementById('Conge2').textContent = `Congeladora: ${fila2.Congeladora}`;
 
   datosLectura2 = fila2;
 }
@@ -123,11 +131,17 @@ async function guardarEnSQL() {
   const payload = {
     periodoA: datosLectura1.Periodo,
     ficheroA: datosLectura1.Fichero_mod,
+    ficheroDespA: datosLectura1.Fichero_Desp,
     parrillaA: datosLectura1.Parrilla,
+    congeA: datosLectura1.Congeladora,
     periodoB: datosLectura2.Periodo,
     ficheroB: datosLectura2.Fichero_mod,
-    parrillaB: datosLectura2.Parrilla
+    ficheroDespB: datosLectura2.Fichero_Desp,
+    parrillaB: datosLectura2.Parrilla,
+    congeB: datosLectura2.Congeladora
   };
+
+  console.log(payload)
 
   const response = await fetch(`${API_URL}/guardar-config`, {
     method: 'POST',

@@ -6,50 +6,57 @@
   <title>Comparativo de Productos</title>
   <script defer src="/static/script_calc.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
 <body class="bg-gray-100 min-h-screen p-6">
-    <header class="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
+    <header class="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
         <div class="container mx-auto px-4">
             <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Navegación principal">
                 <!-- Logo o nombre del sitio -->
                 <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-white">
+                    <a href="{{url_for('ini')}}" target="_blank" rel="noopener noreferrer" class="text-2xl font-bold text-white">
                         <i class="fas fa-chart-line mr-2"></i>
                         SRO
-                    </h1>
+                    </a>
                 </div>
 
                 <!-- Enlaces de navegación -->
                 <ul class="hidden md:flex space-x-8">
                     <li>
-                        <a href="{{url_for('index')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <a href="{{url_for('index')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
                             <i class="fa-solid fa-user-large"></i>
                             Parrilla
                         </a>
                     </li>
                     <li>
-                        <a href="{{url_for('parr')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <a href="{{url_for('parr')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
                             <i class="fa-solid fa-user-group"></i>
                             Parrilla 2
                         </a>
                     </li>
                     <li>
-                        <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <a href="{{url_for('porc')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
                             <i class="fas fa-weight mr-2"></i>
                             Pesos
                         </a>
                     </li>
                     <li>
-                        <a href="{{url_for('calc')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <a href="{{url_for('reps')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                            <i class="fa-regular fa-circle-user"></i>
+                            Representantes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('calc')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
                             <i class="fas fa-calculator mr-2"></i>
                             Cálculo
                         </a>
                     </li>
                     <li>
-                        <a href="{{url_for('conf')}}" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
+                        <a href="{{url_for('conf')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white transition-colors duration-200 flex items-center">
                             <i class="fa-solid fa-gears"></i>
                             Configuracion
                         </a>
@@ -68,31 +75,37 @@
             <div class="hidden md:hidden">
                 <ul class="px-2 pt-2 pb-4 space-y-4">
                     <li>
-                        <a href="{{url_for('index')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <a href="{{url_for('index')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white block transition-colors duration-200">
                             <i class="fas fa-address-book mr-2"></i>
                             Parrilla
                         </a>
                     </li>
                     <li>
-                        <a href="{{url_for('parr')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <a href="{{url_for('parr')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white block transition-colors duration-200">
                             <i class="fas fa-address-book mr-2"></i>
                             Parrilla 2
                         </a>
                     </li>
                     <li>
-                        <a href="{{url_for('porc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <a href="{{url_for('porc')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white block transition-colors duration-200">
                             <i class="fas fa-weight mr-2"></i>
                             Pesos
                         </a>
                     </li>
                     <li>
-                        <a href="{{url_for('calc')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <a href="{{url_for('porc')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                            <i class="fa-regular fa-circle-user"></i>
+                            Representantes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('calc')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white block transition-colors duration-200">
                             <i class="fas fa-calculator mr-2"></i>
                             Cálculo
                         </a>
                     </li>
                     <li>
-                        <a href="{{url_for('conf')}}" class="text-gray-100 hover:text-white block transition-colors duration-200">
+                        <a href="{{url_for('conf')}}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white block transition-colors duration-200">
                             <i class="fa-solid fa-gears"></i>
                             Configuracion
                         </a>
@@ -101,126 +114,33 @@
             </div>
         </div>
     </header>
-    <br><br>
+    <br>
     <!-- Tabla de configuracion de representantes-->
-    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
-        <div class="grid grid-cols-2 gap-6">
-            <!-- Tabla Izquierda -->
-            <div>
-                <table class="w-full border-collapse border border-gray-300">
-                    <thead>
-                        <tr class="bg-blue-500 text-white">
-                            <th class="border border-gray-300 px-4 py-2">BU</th>
-                            <th class="border border-gray-300 px-4 py-2">Tipo</th>
-                            <th class="border border-gray-300 px-4 py-2"># Representantes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Climaterio</td>
-                            <td class="border border-gray-300 px-4 py-2">Hera</td>
-                            <td class="border border-gray-300 px-4 py-2">
-                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                       data-bu="Climaterio" data-tipo="Hera" onchange="calculateTotals()">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Climaterio</td>
-                            <td class="border border-gray-300 px-4 py-2">Atenea</td>
-                            <td class="border border-gray-300 px-4 py-2">
-                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                       data-bu="Climaterio" data-tipo="Atenea" onchange="calculateTotals()">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Ginecología</td>
-                            <td class="border border-gray-300 px-4 py-2">Hera</td>
-                            <td class="border border-gray-300 px-4 py-2">
-                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                       data-bu="Ginecologia" data-tipo="Hera" onchange="calculateTotals()">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Ginecología</td>
-                            <td class="border border-gray-300 px-4 py-2">Atenea</td>
-                            <td class="border border-gray-300 px-4 py-2">
-                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                       data-bu="Ginecologia" data-tipo="Atenea" onchange="calculateTotals()">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Obstetricia</td>
-                            <td class="border border-gray-300 px-4 py-2">Hera</td>
-                            <td class="border border-gray-300 px-4 py-2">
-                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                       data-bu="Obstetricia" data-tipo="Hera" onchange="calculateTotals()">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Obstetricia</td>
-                            <td class="border border-gray-300 px-4 py-2">Atenea</td>
-                            <td class="border border-gray-300 px-4 py-2">
-                                <input type="number" min="0" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                       data-bu="Obstetricia" data-tipo="Atenea" onchange="calculateTotals()">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+    <div class=" flex items-center justify-center bg-gray-100">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-xs text-center space-y-4">
+            <!-- Calcular Button -->
+            <button id="btn-calcular" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors text-base font-medium">
+                Calcular
+            </button>
+
+            <button id="btn-exportar" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 hidden">
+                Exportar a Excel
+            </button>
+    
+            <!-- Timer Display -->
+            <div id="timer" class="text-base font-semibold text-blue-600 hidden">
+                Tiempo transcurrido: <span id="timer-mins">00</span>:<span id="timer-secs">00</span>
             </div>
-
-            <!-- Right Side -->
-            <div class="space-y-6">
-                <!-- Tabla derecha -->
-                <table class="w-full border-collapse border border-gray-300">
-                    <thead>
-                        <tr class="bg-blue-500 text-white">
-                            <th class="border border-gray-300 px-4 py-2">BU</th>
-                            <th class="border border-gray-300 px-4 py-2">Total Representantes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Climaterio</td>
-                            <td class="border border-gray-300 px-4 py-2" id="total-Climaterio">0</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Ginecología</td>
-                            <td class="border border-gray-300 px-4 py-2" id="total-Ginecologia">0</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Obstetricia</td>
-                            <td class="border border-gray-300 px-4 py-2" id="total-Obstetricia">0</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Representantes Exeltis</td>
-                            <td class="border border-gray-300 px-4 py-2" id="reps-Exeltis">0</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <button id="btn-guardar-contactos" class="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors text-lg font-medium">
-                    <i class="fa-solid fa-floppy-disk"></i>
-                    Guardar Representantes
-                </button>
-
-                <!-- Calcular Button -->
-                <button id="btn-calcular" class="w-full bg-blue-500 text-white py-3 px-6 rounded-md hover:bg-blue-600 transition-colors text-lg font-medium">
-                    Calcular
-                </button>
-                
-                <!-- Timer Display -->
-                <div id="timer" class="text-center my-4 text-lg font-semibold text-blue-600 hidden">
-                    Tiempo transcurrido: <span id="timer-mins">00</span>:<span id="timer-secs">00</span>
-                </div>
-
-
-                <div id="spinner" class="hidden text-center my-4">
-                    <span class="text-blue-600 font-semibold">Cargando...</span>
-                  </div>
+    
+            <!-- Spinner -->
+            <div id="spinner" class="hidden">
+                <span class="text-blue-600 font-medium">Cargando...</span>
             </div>
         </div>
     </div>
-    <br><br><br><br>
+    <br><br>
+    <!-- Tablas totales-->
     <h1 class="text-3xl font-bold mb-6 text-center bg-blue-600 text-white p-4 rounded-lg shadow-md">
         Comparativo Parrillas
     </h1>
@@ -230,8 +150,8 @@
         <br>
         <div class="flex flex-row gap-4 mb-6 justify-center">
             <div class="basis-1/6 min-w-[190px]"></div>
-            <div class="basis-2/6 bg-blue-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
-            <div class="basis-2/6 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
+            <div id="Par_1" class="basis-2/6 bg-blue-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
+            <div id="Par_2" class="basis-2/6 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
             <div class="basis-1/6 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Variaciones</div>
         </div>
         <br>
@@ -298,27 +218,31 @@
             
             <!-- Cuadro PPI 1 -->
             <div class="mt-6 grid grid-cols-2 gap-4">
-                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
-                    <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones</legend>
-                    <label >PPI-1 :</label>
-                    <input type="text" id="PPI-1-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                    <label >PPI-2 :</label>
-                    <input type="text" id="PPI-2-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                    <label >PPI-3:</label>
-                    <input type="text" id="PPI-3-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                </fieldset>
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Parrilla-1</legend>
+                <label>PPI-1 :</label>
+                <input type="text" id="PPI-1-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label>PPI-2 :</label>
+                <input type="text" id="PPI-2-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label>PPI-3:</label>
+                <input type="text" id="PPI-3-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label>Total:</label>
+                <input type="text" id="PPI-Total-P1" class="w-full p-2 border rounded-lg bg-yellow-100 text-center font-semibold" readonly>
+            </fieldset>
             </div>
-            <!-- Cuadro PPI 2 -->
+            <!-- Cuadro Parrilla 2 -->
             <div class="mt-6 grid grid-cols-2 gap-4">
-                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
-                    <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones-2</legend>
-                    <label >PPI-1 :</label>
-                    <input type="text" id="PPI-1-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                    <label >PPI-2 :</label>
-                    <input type="text" id="PPI-2-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                    <label >PPI-3:</label>
-                    <input type="text" id="PPI-3-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                </fieldset>
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Parrilla-2</legend>
+                <label>PPI-1 :</label>
+                <input type="text" id="PPI-1-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label>PPI-2 :</label>
+                <input type="text" id="PPI-2-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label>PPI-3:</label>
+                <input type="text" id="PPI-3-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+                <label>Total:</label>
+                <input type="text" id="PPI-Total-P2" class="w-full p-2 border rounded-lg bg-yellow-100 text-center font-semibold" readonly>
+            </fieldset>
             </div>
     </div>
     
@@ -330,8 +254,8 @@
         <br>
         <div class="flex flex-row gap-4 mb-6 justify-center">
             <div class="basis-1/6"></div>
-            <div class="basis-2/6 bg-cyan-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
-            <div class="basis-2/6 bg-cyan-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
+            <div id="Par_3" class="basis-2/6 bg-blue-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
+            <div id="Par_4" class="basis-2/6 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
             <div class="basis-1/6 bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Variaciones</div>
         </div>
         <br>
@@ -396,28 +320,32 @@
         </fieldset>
         </div>
         
-        <!-- Cuadro PPI 1 -->
+        <!-- Parrilla 1 -->
         <div class="mt-6 grid grid-cols-2 gap-4">
             <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
-                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones</legend>
-                <label >PPI-1 :</label>
-                <input type="text" id="PPI-1-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                <label >PPI-2 :</label>
-                <input type="text" id="PPI-2-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                <label >PPI-3:</label>
-                <input type="text" id="PPI-3-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Parrilla-1</legend>
+            <label >PPI-1 :</label>
+            <input type="text" id="PPI-1-P1-climaterio" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-2 :</label>
+            <input type="text" id="PPI-2-P1-climaterio" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-3:</label>
+            <input type="text" id="PPI-3-P1-climaterio" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >Total:</label>
+            <input type="text" id="PPI-Total-P1-climaterio" class="w-full p-2 border rounded-lg bg-yellow-100 text-center font-semibold" readonly>
             </fieldset>
         </div>
-        <!-- Cuadro PPI 2 -->
+        <!-- Parrilla 2 -->
         <div class="mt-6 grid grid-cols-2 gap-4">
             <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
-                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones-2</legend>
-                <label >PPI-1 :</label>
-                <input type="text" id="PPI-1-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                <label >PPI-2 :</label>
-                <input type="text" id="PPI-2-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                <label >PPI-3:</label>
-                <input type="text" id="PPI-3-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Parrilla-2</legend>
+            <label >PPI-1 :</label>
+            <input type="text" id="PPI-1-P2-climaterio" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-2 :</label>
+            <input type="text" id="PPI-2-P2-climaterio" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-3:</label>
+            <input type="text" id="PPI-3-P2-climaterio" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >Total:</label>
+            <input type="text" id="PPI-Total-P2-climaterio" class="w-full p-2 border rounded-lg bg-yellow-100 text-center font-semibold" readonly>
             </fieldset>
         </div>
     </div>
@@ -428,8 +356,8 @@
         <br>
         <div class="flex flex-row gap-4 mb-6 justify-center">
             <div class="basis-1/6"></div>
-            <div class="basis-2/6 bg-green-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
-            <div class="basis-2/6 bg-green-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
+            <div id="Par_5" class="basis-2/6 bg-blue-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
+            <div id="Par_6" class="basis-2/6 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
             <div class="basis-1/6 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Variaciones</div>
         </div>
         <br>
@@ -494,30 +422,34 @@
             </fieldset>
             </div>
             
-            <!-- Cuadro PPI 1 -->
-            <div class="mt-6 grid grid-cols-2 gap-4">
-                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
-                    <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones</legend>
-                    <label >PPI-1 :</label>
-                    <input type="text" id="PPI-1-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                    <label >PPI-2 :</label>
-                    <input type="text" id="PPI-2-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                    <label >PPI-3:</label>
-                    <input type="text" id="PPI-3-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                </fieldset>
-            </div>
-            <!-- Cuadro PPI 2 -->
-            <div class="mt-6 grid grid-cols-2 gap-4">
-                <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
-                    <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones-2</legend>
-                    <label >PPI-1 :</label>
-                    <input type="text" id="PPI-1-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                    <label >PPI-2 :</label>
-                    <input type="text" id="PPI-2-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                    <label >PPI-3:</label>
-                    <input type="text" id="PPI-3-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                </fieldset>
-            </div>
+        <!-- Parrilla 1 -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+            <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Parrilla-1</legend>
+            <label >PPI-1 :</label>
+            <input type="text" id="PPI-1-P1-ginecologia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-2 :</label>
+            <input type="text" id="PPI-2-P1-ginecologia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-3:</label>
+            <input type="text" id="PPI-3-P1-ginecologia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >Total:</label>
+            <input type="text" id="PPI-Total-P1-ginecologia" class="w-full p-2 border rounded-lg bg-yellow-100 text-center font-semibold" readonly>
+            </fieldset>
+        </div>
+        <!-- Parrilla 2 -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
+            <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Parrilla-2</legend>
+            <label >PPI-1 :</label>
+            <input type="text" id="PPI-1-P2-ginecologia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-2 :</label>
+            <input type="text" id="PPI-2-P2-ginecologia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-3:</label>
+            <input type="text" id="PPI-3-P2-ginecologia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >Total:</label>
+            <input type="text" id="PPI-Total-P2-ginecologia" class="w-full p-2 border rounded-lg bg-yellow-100 text-center font-semibold" readonly>
+            </fieldset>
+        </div>
     </div>
     <br><br>
           <!-- Tabla Obstetricia -->
@@ -526,8 +458,8 @@
         <br>
         <div class="flex flex-row gap-4 mb-6 justify-center">
             <div class="basis-1/6"></div>
-            <div class="basis-2/6 bg-indigo-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
-            <div class="basis-2/6 bg-indigo-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
+            <div id="Par_7" class="basis-2/6 bg-blue-300 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 1</div>
+            <div id="Par_8" class="basis-2/6 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Parrilla 2</div>
             <div class="basis-1/6 bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold text-center shadow-lg">Variaciones</div>
         </div>
         <br>
@@ -592,28 +524,32 @@
         </fieldset>
         </div>
         
-        <!-- Cuadro PPI 1 -->
+        <!-- Parrilla 1 -->
         <div class="mt-6 grid grid-cols-2 gap-4">
             <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
-                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones</legend>
-                <label >PPI-1 :</label>
-                <input type="text" id="PPI-1-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                <label >PPI-2 :</label>
-                <input type="text" id="PPI-2-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                <label >PPI-3:</label>
-                <input type="text" id="PPI-3-P1" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Parrilla-1</legend>
+            <label >PPI-1 :</label>
+            <input type="text" id="PPI-1-P1-obstetricia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-2 :</label>
+            <input type="text" id="PPI-2-P1-obstetricia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-3:</label>
+            <input type="text" id="PPI-3-P1-obstetricia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >Total:</label>
+            <input type="text" id="PPI-Total-P1-obstetricia" class="w-full p-2 border rounded-lg bg-yellow-100 text-center font-semibold" readonly>
             </fieldset>
         </div>
-        <!-- Cuadro PPI 2 -->
+        <!-- Parrilla 2 -->
         <div class="mt-6 grid grid-cols-2 gap-4">
             <fieldset class="border border-gray-300 rounded-lg p-4 shadow-md">
-                <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Posiciones-2</legend>
-                <label >PPI-1 :</label>
-                <input type="text" id="PPI-1-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                <label >PPI-2 :</label>
-                <input type="text" id="PPI-2-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
-                <label >PPI-3:</label>
-                <input type="text" id="PPI-3-P2" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <legend class="text-lg font-semibold text-gray-700 px-2">PPI-Parrilla-2</legend>
+            <label >PPI-1 :</label>
+            <input type="text" id="PPI-1-P2-obstetricia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-2 :</label>
+            <input type="text" id="PPI-2-P2-obstetricia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >PPI-3:</label>
+            <input type="text" id="PPI-3-P2-obstetricia" class="w-full p-2 border rounded-lg bg-gray-100 text-center" readonly>
+            <label >Total:</label>
+            <input type="text" id="PPI-Total-P2-obstetricia" class="w-full p-2 border rounded-lg bg-yellow-100 text-center font-semibold" readonly>
             </fieldset>
         </div>
     </div>

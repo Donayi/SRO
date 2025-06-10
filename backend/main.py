@@ -1,14 +1,15 @@
-from fastapi import FastAPI, Depends, Query, HTTPException, APIRouter
+from fastapi import FastAPI, Depends, Query, HTTPException, APIRouter, Request
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
-from .database import get_periodos, get_mdo_for_periodo, guardar_config, datos_otros
+from .database import get_periodos, get_mdo_for_periodo, guardar_config, datos_otros, get_periodos2
 import pyodbc
 import pandas as pd 
 import numpy as np
 from typing import List
+from templates.crud import get_parrillas_data
 
 # Configuración de la base de datos
 DATABASE_URL = "mssql+pyodbc://BS-EXMX/SRO_Modelos?driver=ODBC+Driver+17+for+SQL+Server&Trusted_Connection=yes"
@@ -38,14 +39,21 @@ class RepresentanteDB(Base):
     Tipo = Column(String(100))
     Reps = Column(Integer)
 
+
+class Representante(BaseModel):
+    BU: str
+    Tipo: str
+    Reps: int
+
+    class Config:
+        orm_mode = True
+
 Base.metadata.create_all(bind=engine)
-
-
 
 # FastAPI app
 app = FastAPI()
 
-# CORS para permitir peticiones desde el frontend
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -77,6 +85,10 @@ class Representante(BaseModel):
 @app.get("/periodos")
 async def periodos():
     return get_periodos()
+
+@app.get("/periodos2")
+async def periodos2():
+    return get_periodos2()
 
 @app.get("/mdo/{periodo}")
 async def mdo(periodo: str):
@@ -113,6 +125,13 @@ async def obtener_representantes(db: Session = Depends(get_db)):
         return db.query(RepresentanteDB).all()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+# Ruta API: consulta parrillas desde base de datos con pyodbc
+@app.get("/api/parrillas")
+def get_parrillas():
+    resultado = get_parrillas_data()
+    return resultado
+
 
 # Ruta para guardar selección
 @app.post("/save/")
@@ -309,13 +328,7 @@ def totales_var(df):
 # Calculos
 
 @app.get("/calcular")
-def ejecutar(
-    climaterio_rep: int = Query(0, alias="climaterio"),
-    ginecologia_rep: int = Query(0, alias="ginecologia"),
-    obstetricia_rep: int = Query(0, alias="obstetricia")
-     
-):
-    tot_rep = climaterio_rep + obstetricia_rep + ginecologia_rep
+def ejecutar():
     try:  
         conn_str = (
             f"DRIVER={{SQL Server}};SERVER={DB_CONFIG['server']};"
@@ -323,12 +336,29 @@ def ejecutar(
         )
         conn = pyodbc.connect(conn_str)
         cursor = conn.cursor()
-        cursor.execute("EXEC SP_Parte_One '202501_SRO' , 'Fichero_Medico_MOD_202501_SRO'")
+        # Obtener cantidad de representantes por BU
+        rep_query = """
+            SELECT BU, SUM(Reps) as Repstoti
+            FROM [SRO_Modelos].[dbo].[Representantes]
+            GROUP BY BU
+        """
+        rep_data = pd.read_sql(rep_query, conn)
+
+        # Extraer los valores según BU
+        climaterio_rep = rep_data.loc[rep_data["BU"].str.lower() == "climaterio", "Repstoti"].sum()
+        ginecologia_rep = rep_data.loc[rep_data["BU"].str.lower() == "ginecologia", "Repstoti"].sum()
+        obstetricia_rep = rep_data.loc[rep_data["BU"].str.lower() == "obstetricia", "Repstoti"].sum()
+        tot_rep = climaterio_rep + ginecologia_rep + obstetricia_rep
+
+
+
+        cursor.execute("EXEC SP_Ejecutar_Primeros_pasos")
         conn.commit()
-        cursor.execute("EXEC SP_Parte_Twuo '202501_SRO' , 'Fichero_Med_Despivote_202501_SRO_Unicos'")
+        cursor.execute("EXEC SP_Ejecutar_Segundos_Pasos")
         conn.commit()
 
-        df = pd.read_sql("SELECT * FROM [SRO_Modelos].[dbo].[BASE_SRO_202501_SRO]",conn)
+        df = pd.read_sql("SELECT * FROM [SRO_Modelos].[dbo].[BASE_SRO_Muestra]",conn)
+
         df_clim =  df.query("BU == 'climaterio'")
         df_gine =  df.query("BU == 'ginecologia'")
         df_obste =  df.query("BU == 'obstetricia'")
@@ -358,6 +388,35 @@ def ejecutar(
         return {"error": str(e)}
     finally:
         conn.close()
+
+def obtener_pos_ppi():
+    conn_str = (
+            f"DRIVER={{SQL Server}};SERVER={DB_CONFIG['server']};"
+            f"DATABASE={DB_CONFIG['database']};Trusted_Connection=yes;"
+        )
+    conn = pyodbc.connect(conn_str)
+    query = "SELECT [Parrilla], [BU], CONCAT(BU,' ',Rank_Avg) as LLAVEAR, [Rank_Avg], [POSPPI] FROM [SRO_Modelos].[dbo].[POS_PPI]"
+    df = pd.read_sql(query, conn)
+    conn.close()
+    return df
+
+@app.get("/ppi_totales/{bu}")
+async def get_ppi_totales(bu: str):
+    df = obtener_pos_ppi()
+    
+    # Filtrar solo por BU solicitada (ej: 'Climaterio', 'Ginecologia', 'Obstetricia')
+    df_bu = df[df["BU"].str.lower() == bu.lower()]
+    
+    # Diccionario para resultados por Rank_Avg 1,2,3
+    ppi_totales = {}
+    for rank in [1, 2, 3]:
+        suma_posppi = df_bu[df_bu["Rank_Avg"] == rank]["POSPPI"].sum()
+        ppi_totales[f"PPI-{rank}"] = round(suma_posppi, 2)
+    
+    return {
+        "BU": bu,
+        "ppi_totales": ppi_totales
+    }
 
 
 @app.get("/datos/{per}")

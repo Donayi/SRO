@@ -40,6 +40,9 @@ def init_db():
 @app.route('/')
 def index():
     return render_template('tabla_menu.html')
+@app.route('/inicio')
+def ini():
+    return render_template('inicio.html')
 
 @app.route('/porc')
 def porc():
@@ -55,6 +58,9 @@ def calc():
 @app.route('/conf')
 def conf():
     return render_template('config.html')
+@app.route('/reps')
+def reps():
+    return render_template('Representantes.html')
 
 @app.route('/images/<path:filename>')
 def custom_static(filename):
